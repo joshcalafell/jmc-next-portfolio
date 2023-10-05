@@ -1,18 +1,31 @@
-import BaseTemplate, { IBaseTemplate } from './BaseTemplate'
-import { mockBaseTemplateProps } from './BaseTemplate.mocks'
+import { Meta, StoryObj } from '@storybook/react'
+import BaseTemplate from './BaseTemplate'
 
-export default {
-  title: 'templates/BaseTemplate',
+const meta = {
+  title: 'template/BaseTemplate',
+  component: BaseTemplate,
+  parameters: {
+    // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/react/configure/story-layout
+    layout: 'centered',
+  },
+  // This component will have an automatically generated Autodocs entry: https://storybook.js.org/docs/react/writing-docs/autodocs
+  tags: ['autodocs'],
+  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
+} satisfies Meta<typeof BaseTemplate>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+// More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
+export const Primary: Story = {
+  args: {
+    sampleTextProp: 'Hello World',
+  },
 }
 
-import { ComponentStory } from '@storybook/react'
-
-const Template: ComponentStory<typeof BaseTemplate> = (args: IBaseTemplate) => (
-  <BaseTemplate {...args} />
-)
-
-export const Base: ComponentStory<typeof BaseTemplate> = Template.bind({})
-Base.args = {
-  ...mockBaseTemplateProps.base,
+export const Alternate: Story = {
+  args: {
+    sampleTextProp: 'Hello Alternate World',
+  },
 }
